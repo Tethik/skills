@@ -1,0 +1,42 @@
+{
+  "skill_name": "trufflehog",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Scan /workspace/user/some-repo for any leaked secrets or credentials",
+      "expected_output": "Installs trufflehog if needed, runs a single focused scan against the local repo using git mode (full history), saves a dated JSON file, and prints a clean summary of findings.",
+      "files": [],
+      "assertions": [
+        {"text": "At least one .json output file exists in outputs/"},
+        {"text": "summary.txt exists and contains scan results"},
+        {"text": "Single primary scan run — not 5+ redundant scan variations"},
+        {"text": "Summary clearly reports 0 findings (no secrets found)"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run trufflehog on https://github.com/trufflesecurity/test_keys and save the output",
+      "expected_output": "Runs trufflehog against the GitHub URL, saves a dated JSON file named after the repo, and summarizes 9 findings (2 verified, 7 unverified) with detector breakdown.",
+      "files": [],
+      "assertions": [
+        {"text": "A JSON output file is saved"},
+        {"text": "summary.txt exists with finding details"},
+        {"text": "Summary reports exactly 9 total findings"},
+        {"text": "Verified (2) and unverified (7) findings are clearly distinguished"},
+        {"text": "Output JSON file has a descriptive dated name (e.g. trufflehog-test_keys-2026-06-05.json), not a generic name like scan_output.json"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I need to check both /workspace/user/some-repo and https://github.com/trufflesecurity/test_keys for secrets. Can you scan both?",
+      "expected_output": "Scans both targets, saves separate dated JSON files for each, uses git mode (not filesystem mode) for the local repo, and produces a combined summary with totals across both targets.",
+      "files": [],
+      "assertions": [
+        {"text": "Two separate JSON files exist — one per target"},
+        {"text": "summary.txt exists and covers both targets"},
+        {"text": "Local repo scanned using git mode (full history), not filesystem mode"},
+        {"text": "Summary includes combined totals across both targets"}
+      ]
+    }
+  ]
+}
