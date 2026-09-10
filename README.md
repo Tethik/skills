@@ -12,6 +12,7 @@ follows when the skill is triggered.
 | --- | --- |
 | [`trufflehog`](trufflehog/SKILL.md) | Secret scanning for pentesters using [TruffleHog](https://github.com/trufflesecurity/trufflehog). Scans local repos, GitHub repo URLs, or whole GitHub orgs for leaked secrets, credentials, API keys, and tokens, then summarizes verified vs. unverified findings. |
 | [`github-pull-requests`](github-pull-requests/SKILL.md) | House style for git commits and GitHub pull requests. Enforces short, concise commit messages and PR descriptions, no test-plan sections, and draft-by-default PR creation with the `gh` CLI. |
+| [`readme`](readme/SKILL.md) | House style for project READMEs. Keeps them short and pitched at the end user — what it is, Usage, Configuration — with longer material pushed out to separate markdown docs. |
 
 ## Installing a skill
 
